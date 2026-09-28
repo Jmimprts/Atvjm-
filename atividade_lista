@@ -1,0 +1,53 @@
+#include <iostream>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* next;
+};
+
+void encontrarMeio(Node* head) {
+    Node* lento = head;
+    Node* rapido = head;
+
+    while (rapido != NULL && rapido->next != NULL) {
+        lento = lento->next;
+        rapido = rapido->next->next;
+    }
+
+    cout << "Valor do meio: " << lento->data << endl;
+}
+
+bool procurar(Node* head, int valor) {
+    while (head != NULL) {
+        if (head->data == valor) {
+            return true;
+        }
+
+        head = head->next;
+    }
+
+    return false;
+}
+
+int main() {
+    Node* head = new Node{1, NULL};
+
+    head->next = new Node{2, NULL};
+    head->next->next = new Node{3, NULL};
+    head->next->next->next = new Node{4, NULL};
+    head->next->next->next->next = new Node{5, NULL};
+    head->next->next->next->next->next = new Node{6, NULL};
+
+    encontrarMeio(head);
+
+    int valor = 4;
+
+    if (procurar(head, valor)) {
+        cout << "O valor " << valor << " existe na lista: true" << endl;
+    } else {
+        cout << "O valor " << valor << " existe na lista: false" << endl;
+    }
+
+    return 0;
+}
